@@ -1,18 +1,21 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Markdown Reader</title>
+    <title>Constitution - Secular Democratic Republic</title>
     <link rel="stylesheet" href="/sources/markdown_reader/markdown.css" />
+    <link rel="stylesheet" href="/sources/sidebar/sidebar.css" />
 </head>
 <body>
-    <div class="container">
+    <!-- Sidebar will be injected here -->
+    <div id="sidebar-container"></div>
+    
+    <div class="main-content">
         <div id="markdown-output" 
-             data-github-url="https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/refs/heads/main/contents/01B_constitution.md">
-            <!-- Markdown will be loaded here automatically -->
+             data-github-url="https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/main/contents/01B_constitution.md">
         </div>
-        <p>Markdown files are supposed to be displayed as HTML here. </p>
     </div>
+    
     <script src="/sources/markdown_reader/markdown.js"></script>
+    <script src="/sources/sidebar/sidebar.js"></script>
 </body>
 </html>
