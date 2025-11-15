@@ -1,10 +1,6 @@
 // Document configuration - maps sidebar links to your markdown files
 const documents = {
-    'constitution': 'https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/main/contents/01B_constitution.md',
-    'education': 'https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/main/contents/education.md',
-    'laws': 'https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/main/contents/laws.md',
-    'amendments': 'https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/main/contents/amendments.md',
-    'rights': 'https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/main/contents/rights.md'
+    'constitution': 'https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/main/contents/01B_constitution.md'
 };
 
 // Initialize navigation
