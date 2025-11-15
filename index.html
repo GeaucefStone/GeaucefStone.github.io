@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Constitution - Secular Democratic Republic</title>
-    <link rel="stylesheet" href="/sources/markdown_reader/markdown.css" />
-    <!-- No need to link sidebar.css here anymore! -->
+    <title>Secular Democratic Republic - Document Library</title>
+    <link rel="stylesheet" href="sources/markdown_reader/markdown.css" />
+    <link rel="stylesheet" href="sources/sidebar/sidebar.css" />
 </head>
 <body>
-    <div id="sidebar-container"></div>
-    
-    <div class="main-content">
-        <div id="markdown-output" 
-             data-github-url="https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/main/contents/01B_constitution.md">
+    <!-- Pure CSS Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h3>Document Library</h3>
         </div>
-    </div>
-    
-    <script src="/sources/markdown_reader/markdown.js"></script>
-    <script src="/sources/sidebar/sidebar.js"></script>
+        <ul class="sidebar-menu">
+            <li><a href="#constitution">Constitution</a></li>
+            <li><a href="#education">Education System</a></li>
+            <li><a href="#laws">National Laws</a></li>
+            <li><a href="#amendments">Amendments</a></li>
+            <li><a href="#rights">Bill of Rights</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>Secular Democratic Republic</p>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <div id="markdown-output">
+            <div class="welcome-message">
+                <h1>Welcome to the Document Library</h1>
+                <p>Select a document from the sidebar to begin reading.</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="sources/markdown_reader/markdown.js"></script>
+    <script src="sources/sidebar/navigator.js"></script>
 </body>
 </html>
