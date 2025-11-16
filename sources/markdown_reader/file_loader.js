@@ -8,6 +8,11 @@ const documentRegistry = {
     'the_last_landlord': 'https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/refs/heads/main/contents/education/textbook/01D_the_last_landlord.md',
     'housing': 'https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/refs/heads/main/contents/education/textbook/01E_analysis-housing.md',
     'what_is_a_theocrat': 'https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/refs/heads/main/contents/education/textbook/01F_analysis-what_is_a_theocrat.md', 
+    'immigration_and_secularism': 'https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/refs/heads/main/contents/education/textbook/01G_analysis-immigration_and_secularism.md',
+    'bodily_autonomy_and_public_health': 'https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/refs/heads/main/contents/education/textbook/01H_analysis-bodily_autonomy_and_public_health.md',
+    'womens_autonomy': 'https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/refs/heads/main/contents/education/textbook/01I_analysis-womens_autonomy.md', 
+    'coerced_marriage': 'https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/refs/heads/main/contents/education/textbook/01J_analysis-coerced_marriage.md',
+    'no_fault_divorce': 'https://raw.githubusercontent.com/GeaucefStone/Secular_Democratic_Republic/refs/heads/main/contents/education/textbook/01K_analysis-no_fault_divorce.md',
 };
 
 // Load a specific document by ID
