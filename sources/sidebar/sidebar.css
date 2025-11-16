@@ -88,3 +88,11 @@
     color: #2d3748;
     margin-bottom: 15px;
 }
+
+.main-content #markdown-output {
+    line-height: 1.5;
+    padding: 40px;
+    background: #fafafa;
+    min-height: calc(100vh - 80px);
+    margin: 0;
+}
