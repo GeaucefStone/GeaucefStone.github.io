@@ -1,4 +1,4 @@
-// Markdown Renderer for GitHub Pages - Auto-load from GitHub
+// Markdown Parser - Pure parsing functionality only
 (function() {
     // Focus on bold, italic (underscores only), and links
     function processBold(text) {
@@ -60,6 +60,7 @@
         return { html: html, newIndex: i - 1 };
     }
 
+    // Main Markdown parsing function
     function parseMarkdown(md) {
         let inSolidList = false;
         let inHollowList = false;
@@ -154,9 +155,14 @@
         return result.join('\n');
     }
 
-    // Auto-load Markdown from GitHub
-    function loadMarkdownFromGitHub(githubRawUrl) {
+    // Export the loadMarkdownFromGitHub function for external use
+    window.loadMarkdownFromGitHub = function(githubRawUrl) {
         const output = document.getElementById('markdown-output');
+        
+        if (!output) {
+            console.error('markdown-output element not found');
+            return;
+        }
         
         // Show loading state
         output.innerHTML = '<p style="text-align: center; color: #999;">Loading Markdown from GitHub...</p>';
@@ -181,15 +187,8 @@
                     </div>
                 `;
             });
-    }
+    };
 
-    // Initialize when DOM is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get the GitHub URL from data attribute or use a default
-        const outputElement = document.getElementById('markdown-output');
-        const githubUrl = outputElement.getAttribute('data-github-url') || 
-                         'https://raw.githubusercontent.com/your-username/your-repo/main/README.md';
-        
-        loadMarkdownFromGitHub(githubUrl);
-    });
+    // Also export parseMarkdown in case it's needed elsewhere
+    window.parseMarkdown = parseMarkdown;
 })();
