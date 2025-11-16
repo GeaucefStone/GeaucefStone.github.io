@@ -1,13 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secular Democratic Republic - Document Library</title>
-    <link rel="stylesheet" href="sources/markdown_reader/markdown.css" />
-    <link rel="stylesheet" href="sources/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="sources/markdown_reader/markdown.css">
+    <link rel="stylesheet" href="sources/sidebar/sidebar.css">
+    <link rel="stylesheet" href="sources/mobile/mobile.css">
 </head>
 <body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <div class="mobile-header-content">
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <div class="mobile-title">Document Library</div>
+            <div style="width: 44px;"></div> <!-- Spacer for balance -->
+        </div>
+    </header>
+
+    <!-- Overlay for mobile sidebar -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
     <!-- Pure CSS Sidebar -->
-    <nav class="sidebar">
+    <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h3>Document Library</h3>
         </div>
@@ -62,5 +77,6 @@
     <script src="sources/markdown_reader/markdown.js"></script>
     <script src="sources/markdown_reader/file_loader.js"></script>
     <script src="sources/sidebar/navigator.js"></script>
+    <script src="sources/mobile/mobile.js"></script>
 </body>
 </html>
