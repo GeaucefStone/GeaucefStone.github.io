@@ -3,21 +3,39 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize document loader
     initDocumentLoader();
     
-    // Set up dropdown toggle functionality
+    // Get elements
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
     const dropdownToggle = document.querySelector('.dropdown-toggle');
     const dropdownMenu = document.querySelector('.dropdown-menu');
     
+    // Mobile sidebar toggle
+    if (mobileMenuToggle && sidebar) {
+        mobileMenuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('mobile-open');
+            sidebarOverlay.classList.toggle('active');
+        });
+        
+        // Close sidebar when overlay is clicked
+        sidebarOverlay.addEventListener('click', function() {
+            sidebar.classList.remove('mobile-open');
+            sidebarOverlay.classList.remove('active');
+        });
+    }
+    
+    // Dropdown functionality
     if (dropdownToggle && dropdownMenu) {
         dropdownToggle.addEventListener('click', function(e) {
             e.preventDefault();
-            e.stopPropagation(); // Prevent event from bubbling up
+            e.stopPropagation();
             this.classList.toggle('active');
             dropdownMenu.classList.toggle('active');
         });
         
         // Prevent dropdown menu clicks from closing the dropdown
         dropdownMenu.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent event from bubbling up
+            e.stopPropagation();
         });
     }
     
@@ -32,29 +50,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Set up sidebar click handlers for all links (including dropdown items)
-    document.querySelectorAll('.sidebar-menu a').forEach(link => {
+    // Handle all document link clicks
+    document.querySelectorAll('.sidebar-menu a[href^="#"]').forEach(link => {
         link.addEventListener('click', function(e) {
-            // Don't prevent default for dropdown toggle (already handled above)
+            // Handle dropdown toggle separately
             if (this.classList.contains('dropdown-toggle')) {
-                return;
+                return; // Already handled above
             }
             
             e.preventDefault();
-            const docId = this.getAttribute('href').substring(1); // Remove #
+            const docId = this.getAttribute('href').substring(1);
             
             // Use the file loader to load the document
             if (loadDocument(docId)) {
                 // Update active state for all links
-                document.querySelectorAll('.sidebar-menu a').forEach(a => {
-                    a.classList.remove('active');
-                    // Remove active state from dropdown parent if this is a dropdown item
-                    if (a.classList.contains('dropdown-toggle') && this.closest('.dropdown-menu')) {
-                        a.classList.remove('active');
-                    }
-                });
-                
-                // Add active state to clicked link
+                document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
                 this.classList.add('active');
                 
                 // If this is a dropdown item, also activate the dropdown toggle
@@ -66,10 +76,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
-                // Close mobile sidebar if on mobile
-                if (window.innerWidth <= 768) {
-                    const sidebar = document.getElementById('sidebar');
-                    const sidebarOverlay = document.getElementById('sidebar-overlay');
+                // Close mobile sidebar if on mobile (but NOT for dropdown toggle)
+                if (window.innerWidth <= 768 && !this.classList.contains('dropdown-toggle')) {
                     if (sidebar && sidebarOverlay) {
                         sidebar.classList.remove('mobile-open');
                         sidebarOverlay.classList.remove('active');
@@ -97,6 +105,48 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
+    }
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            if (sidebar && sidebarOverlay) {
+                sidebar.classList.remove('mobile-open');
+                sidebarOverlay.classList.remove('active');
+            }
+        }
+    });
+    
+    // Wrap tables for mobile scrolling
+    function wrapTablesForMobile() {
+        document.querySelectorAll('#markdown-output table').forEach(table => {
+            if (!table.parentElement.classList.contains('table-container')) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'table-container';
+                table.parentNode.insertBefore(wrapper, table);
+                wrapper.appendChild(table);
+            }
+        });
+    }
+    
+    // Observe for content changes to wrap new tables
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList') {
+                wrapTablesForMobile();
+            }
+        });
+    });
+    
+    const markdownOutput = document.getElementById('markdown-output');
+    if (markdownOutput) {
+        observer.observe(markdownOutput, {
+            childList: true,
+            subtree: true
+        });
+        
+        // Initial wrap
+        wrapTablesForMobile();
     }
 });
 
