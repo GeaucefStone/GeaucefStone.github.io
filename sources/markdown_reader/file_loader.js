@@ -2,6 +2,7 @@
 const documentRegistry = {
     // Short IDs mapped to file paths (not full URLs)
     'constitution': 'contents/01B_constitution.md',
+    // Legal Framework and Governance
     'poetic_justice': 'contents/education/textbook/00_analysis-flexible_sentencing.md',
     'proxicide_doctrine': 'contents/education/textbook/01A_analysis-proxicide_doctrine.md',
     'tiered_self_defense_framework': 'contents/education/textbook/01B_analysis-tiered_self_defense_framework.md',
@@ -30,6 +31,17 @@ const documentRegistry = {
     'anti_corruption_architecture': 'contents/education/textbook/01Y_anti_corruption_architecture.md', 
     'civil_war_crimes': 'contents/education/textbook/01Z_analysis-civil_war_crimes.md', 
     'retained_sovereignty': 'contents/education/textbook/02A_analysis-retained_sovereignty.md',
+    // Case Study
+    'highway_interceptor': 'contents/simulations/case_study/highway_interceptor_case.md',
+    'hoa_vs_doe': 'contents/simulations/case_study/hoa_vs_doe.md',
+    'oakwood_vs_vance': 'contents/simulations/case_study/oakwood_vs_vance.md', 
+    'petrov_vs_extradition': 'contents/simulations/case_study/petrov_vs_extradition_treaty.md',
+    'poisoned_chalic_doctrine': 'contents/simulations/case_study/poisoned_chalice_doctrine.md',
+    'the_perpetual_tenancy': 'contents/simulations/case_study/the_perpetual_tenancy.md', 
+    'thou_shalt_not_bear_false_witness': 'contents/simulations/case_study/thou_shalt_not_bear_false_witness.md',
+    'tiptoeing_the_voice_activated_minefield': 'contents/simulations/case_study/tiptoeing_the_voice_activated_minefield.md', 
+    'troll_kings_downfall': 'contents/simulations/case_study/troll_kings_downfall.md', 
+    
 };
 
 // Configuration - update these once if your repo changes
