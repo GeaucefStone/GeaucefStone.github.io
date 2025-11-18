@@ -4,6 +4,5 @@ This page is intended to provide a user-friendly interface.
 
 #### To Do: 
 
-1. Complete embedding education files. 
-
-2. Make index.html more mobile friendly. 
+1. Update file loader to corrospond with index
+2. Include more files. 
