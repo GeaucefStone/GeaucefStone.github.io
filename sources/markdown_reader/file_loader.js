@@ -1,4 +1,4 @@
-// File Loader for Markdown Documents with URL Shortening
+// File Loader for Markdown Documents with Multi-Platform Support
 const documentRegistry = {
     // Short IDs mapped to file paths (not full URLs)
     'constitution': 'contents/01B_constitution.md',
@@ -26,7 +26,7 @@ const documentRegistry = {
     'safe_emancipation_of_minors': 'contents/education/textbook/01M_analysis-safe_emancipation_of_minors.md',
     'citizens_branch': 'contents/education/textbook/01N_analysis-citizens_branch.md',
     'workers_branch': 'contents/education/textbook/01O_analysis-workers_branch.md',
-    'scientific_branch': 'contents/education/textbook/01P_analysis-scientific_branch.md', // Fixed duplicate
+    'scientific_branch': 'contents/education/textbook/01P_analysis-scientific_branch.md',
     'surgeon_court': 'contents/education/textbook/01Q_analysis-surgeon_court.md',
     'historian_branch': 'contents/education/textbook/01R_analysis-historian_branch.md',
     'historian_court': 'contents/education/textbook/01S_analysis-historian_court.md', 
@@ -63,20 +63,82 @@ const documentRegistry = {
     'groves_defense': 'contents/simulations/scenarios/the_groves_defense.md', 
     'mathematical_sentence': 'contents/simulations/scenarios/the_mathematical_sentence.md',
     'secular_defense': 'contents/simulations/scenarios/the_secular_defense.md',
-
 };
 
-// Configuration - update these once if your repo changes
+// Platform configurations
+const PLATFORMS = {
+    github: {
+        name: 'GitHub',
+        baseUrl: 'https://raw.githubusercontent.com',
+        urlTemplate: '{baseUrl}/{username}/{repository}/{branch}/{filePath}'
+    },
+    codeberg: {
+        name: 'Codeberg',
+        baseUrl: 'https://codeberg.org',
+        urlTemplate: '{baseUrl}/{username}/{repository}/raw/branch/{branch}/{filePath}'
+    },
+    gitlab: {
+        name: 'GitLab',
+        baseUrl: 'https://gitlab.com',
+        urlTemplate: '{baseUrl}/{username}/{repository}/-/raw/{branch}/{filePath}'
+    },
+    gitea: {
+        name: 'Gitea',
+        baseUrl: 'https://gitea.com',
+        urlTemplate: '{baseUrl}/{username}/{repository}/raw/branch/{branch}/{filePath}'
+    }
+};
+
+// Default repository configuration
 const REPO_CONFIG = {
+    platform: 'github', // 'github', 'codeberg', 'gitlab', 'gitea'
     username: 'GeaucefStone',
     repository: 'Secular_Democratic_Republic',
-    branch: 'main',
-    basePath: 'https://raw.githubusercontent.com'
+    branch: 'main'
 };
 
-// Generate full raw GitHub URL from short path
+// Generate full raw URL from short path
 function getFullRawUrl(shortPath) {
-    return `${REPO_CONFIG.basePath}/${REPO_CONFIG.username}/${REPO_CONFIG.repository}/${REPO_CONFIG.branch}/${shortPath}`;
+    const platform = PLATFORMS[REPO_CONFIG.platform];
+    if (!platform) {
+        console.error('Unsupported platform:', REPO_CONFIG.platform);
+        return null;
+    }
+    
+    return platform.urlTemplate
+        .replace('{baseUrl}', platform.baseUrl)
+        .replace('{username}', REPO_CONFIG.username)
+        .replace('{repository}', REPO_CONFIG.repository)
+        .replace('{branch}', REPO_CONFIG.branch)
+        .replace('{filePath}', shortPath);
+}
+
+// Get URLs for all platforms (useful for mirroring)
+function getAllPlatformUrls(docId) {
+    const shortPath = documentRegistry[docId];
+    if (!shortPath) return null;
+    
+    const urls = {};
+    for (const [platformKey, platformConfig] of Object.entries(PLATFORMS)) {
+        urls[platformKey] = platformConfig.urlTemplate
+            .replace('{baseUrl}', platformConfig.baseUrl)
+            .replace('{username}', REPO_CONFIG.username)
+            .replace('{repository}', REPO_CONFIG.repository)
+            .replace('{branch}', REPO_CONFIG.branch)
+            .replace('{filePath}', shortPath);
+    }
+    return urls;
+}
+
+// Switch between platforms
+function setPlatform(platform) {
+    if (!PLATFORMS[platform]) {
+        console.error('Unsupported platform. Available:', Object.keys(PLATFORMS));
+        return false;
+    }
+    REPO_CONFIG.platform = platform;
+    console.log(`Switched to ${PLATFORMS[platform].name}`);
+    return true;
 }
 
 // Load a specific document by ID
@@ -90,8 +152,10 @@ function loadDocument(docId) {
     const fullUrl = getFullRawUrl(shortPath);
     const output = document.getElementById('markdown-output');
     
-    // Show loading state
-    output.innerHTML = '<p style="text-align: center; color: #999;">Loading document...</p>';
+    // Show loading state with platform info
+    output.innerHTML = `<p style="text-align: center; color: #999;">
+        Loading document from ${PLATFORMS[REPO_CONFIG.platform].name}...
+    </p>`;
     
     // Update URL without page reload
     window.history.pushState(null, '', `#${docId}`);
@@ -112,15 +176,60 @@ function getDocumentUrl(docId) {
     return shortPath ? getFullRawUrl(shortPath) : null;
 }
 
-// Get short path by ID (useful for debugging)
+// Get short path by ID
 function getDocumentShortPath(docId) {
     return documentRegistry[docId];
 }
 
-// Update repository configuration (if you ever move the repo)
+// Update repository configuration
 function updateRepoConfig(newConfig) {
     Object.assign(REPO_CONFIG, newConfig);
     console.log('Repository configuration updated:', REPO_CONFIG);
+}
+
+// Get current platform info
+function getCurrentPlatform() {
+    return {
+        ...REPO_CONFIG,
+        platformName: PLATFORMS[REPO_CONFIG.platform].name
+    };
+}
+
+// Get document by category (useful for UI organization)
+function getDocumentsByCategory() {
+    const categories = {
+        'Base System': [
+            'constitution', 'legal_dictionary', 'department_structure', 
+            'agency_structure', 'tax_structure'
+        ],
+        'Legal Framework': [
+            'poetic_justice', 'proxicide_doctrine', 'tiered_self_defense_framework',
+            'defense_and_transferred_liability', 'the_last_landlord', 'housing',
+            'what_is_a_theocrat', 'immigration_and_secularism', 'bodily_autonomy_and_public_health',
+            'womens_autonomy', 'coerced_marriage', 'no_fault_divorce', 'romeo_and_juliet',
+            'safe_emancipation_of_minors', 'citizens_branch', 'workers_branch',
+            'scientific_branch', 'surgeon_court', 'historian_branch', 'historian_court',
+            'covert_ops', 'conspiracy_framework', 'financial_conflicts', 'substance_over_form',
+            'poisoned_chalice_provision', 'anti_corruption_architecture', 'civil_war_crimes',
+            'retained_sovereignty'
+        ],
+        'Case Studies': [
+            'highway_interceptor', 'hoa_vs_doe', 'oakwood_vs_vance',
+            'petrov_vs_extradition', 'poisoned_chalic_doctrine', 'the_perpetual_tenancy',
+            'thou_shalt_not_bear_false_witness', 'tiptoeing_the_voice_activated_minefield',
+            'troll_kings_downfall'
+        ],
+        'Civil Acts': [
+            'holocaust_denial'
+        ],
+        'Scenarios': [
+            'atlas_dilemma', 'landlords_gambit', 'nathaniels_dilemma',
+            'quarantine_dilemma', 'sterling_dilemma', 'case_of_two_schools',
+            'groves_defense', 'mathematical_sentence', 'secular_defense'
+        ]
+    };
+    
+    return categories;
 }
 
 // Initialize document loader
@@ -138,12 +247,17 @@ function initDocumentLoader() {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         documentRegistry,
+        PLATFORMS,
+        REPO_CONFIG,
         loadDocument,
         getAvailableDocuments,
         getDocumentUrl,
         getDocumentShortPath,
         updateRepoConfig,
-        initDocumentLoader,
-        REPO_CONFIG
+        setPlatform,
+        getCurrentPlatform,
+        getAllPlatformUrls,
+        getDocumentsByCategory,
+        initDocumentLoader
     };
 }
