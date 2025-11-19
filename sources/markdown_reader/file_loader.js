@@ -5,7 +5,7 @@ const documentRegistry = {
 
     // Base System
     'legal_dictionary': 'contents/01C_legal_dictionary.md',
-    'department_structure': 'contents/01D_department_structures.md',
+    'department_structure': 'contents/01D_department_structure.md',
     'agency_structure': 'contents/01E_agency_structure.md',
     'tax_structure': 'contents/01F_tax_structure.md',
 
