@@ -12,6 +12,7 @@ const documentRegistry = {
     // Legal Framework and Governance
     'poetic_justice': 'contents/education/textbook/00_analysis-flexible_sentencing.md',
     'proxicide_doctrine': 'contents/education/textbook/01A_analysis-proxicide_doctrine.md',
+    'privacy_and_surveilance': 'contents/education/textbook/01A0_analysis-balance_of_privacy_and_surveilance.md',
     'tiered_self_defense_framework': 'contents/education/textbook/01B_analysis-tiered_self_defense_framework.md',
     'defense_and_transferred_liability': 'contents/education/textbook/01C_analysis-defense_and_transferred_liability.md',
     'the_last_landlord': 'contents/education/textbook/01D_the_last_landlord.md',
