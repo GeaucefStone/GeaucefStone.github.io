@@ -9,6 +9,7 @@ const documentRegistry = {
     'agency_structure': 'contents/01E_agency_structure.md',
     'tax_structure': 'contents/01F_tax_structure.md',
     'law_making_process': 'contents/01G_law_making_process.md',
+    'governing_syste': 'contents/01H_governing_system.md',
 
     // Legal Framework and Governance
     'poetic_justice': 'contents/education/textbook/00_analysis-flexible_sentencing.md',
