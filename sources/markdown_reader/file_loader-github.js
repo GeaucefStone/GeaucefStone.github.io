@@ -27,6 +27,8 @@ const documentRegistry = {
     'military_age_cognition_act': 'contents/acts/01H_military_age_cognition_act.md',
     'conversion_therapy_ban': 'contents/acts/01I_conversion_therapy_ban.md',
     'responsible_carry': 'contents/acts/01J_responsible_carry.md',
+    'school_nutrition': 'contents/acts/01K_school_nutrition_integrity.md',
+    'substance_free': 'contents/acts/01L_substance_free_spaces.md',
 
     // Legal Framework & Governance
     'poetic_justice': 'contents/education/textbook/00_analysis-flexible_sentencing.md',
